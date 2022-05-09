@@ -1,12 +1,11 @@
-use axum::{routing::get, Router, extract::Query};
+use axum::{extract::Query, routing::get, Router};
 extern crate keyring;
 extern crate serde;
 extern crate serde_json;
-use anyhow::{Context, Result, anyhow};
+use anyhow::{anyhow, Context, Result};
 use oauth2::CsrfToken;
 
-
-use std::{net::SocketAddr, collections::HashMap};
+use std::{collections::HashMap, net::SocketAddr};
 use tokio::sync::mpsc::{channel, unbounded_channel};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -24,7 +23,6 @@ impl AuthInfo {
         }
     }
 }
-    
 
 fn auth_info_from_params(params: &HashMap<String, String>) -> Option<AuthInfo> {
     let auth_info = AuthInfo {
@@ -33,7 +31,6 @@ fn auth_info_from_params(params: &HashMap<String, String>) -> Option<AuthInfo> {
     };
     Some(auth_info)
 }
-
 
 pub async fn run(bind: String) -> Result<AuthInfo> {
     // create a future to signal when we should stop
@@ -51,7 +48,6 @@ pub async fn run(bind: String) -> Result<AuthInfo> {
         }),
     );
 
-
     // create a future to signal when we should stop
 
     // run it with hyper on localhost:3000
@@ -62,7 +58,11 @@ pub async fn run(bind: String) -> Result<AuthInfo> {
         });
     tokio::spawn(server);
 
-    let auth_info = callback_rx.recv().await.flatten().context("Failed to get auth info")?;
+    let auth_info = callback_rx
+        .recv()
+        .await
+        .flatten()
+        .context("Failed to get auth info")?;
     stop_tx.send(())?;
 
     log::debug!("auth_info {:?}", auth_info);

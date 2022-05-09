@@ -1,13 +1,10 @@
-mod callback;
 mod build_config;
+mod callback;
 use std::collections::HashMap;
 
 use build_config::BUILD_CONFIG;
 
 use chrono::prelude::*;
-extern crate keyring;
-extern crate serde;
-extern crate serde_json;
 
 use anyhow::{anyhow, Context, Result};
 use oauth2::basic::{BasicClient, BasicTokenType};
@@ -17,7 +14,6 @@ use oauth2::{
     PkceCodeChallenge, RedirectUrl, Scope, StandardTokenResponse, TokenResponse, TokenUrl,
 };
 use portpicker::pick_unused_port;
-
 
 #[macro_use]
 extern crate serde_derive;
@@ -34,7 +30,7 @@ struct Command {
     name: String,
     args: Vec<String>,
     stdin: Option<String>,
-    uploads: Option<HashMap<String,String>>,
+    uploads: Option<HashMap<String, String>>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -57,7 +53,9 @@ async fn main() -> Result<()> {
     };
 
     let args = std::env::args().collect::<Vec<String>>();
-    let (name, args) = args.split_first().context("something wrong with the arguments")?;
+    let (name, args) = args
+        .split_first()
+        .context("something wrong with the arguments")?;
 
     let cmd = Command {
         name: name.to_string(),

@@ -13,15 +13,15 @@ pub enum IdentityProvider {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BuildConfig {
-   pub client_id: String,
-   pub client_secret: String,
-   pub auth_uri: String,
-   pub token_uri: String,
-   pub scopes: Vec<String>,
-   pub keyring_service: String,
-   pub keyring_username: String,
-   pub identity_provider: IdentityProvider,
-   pub shim_endpoint_url: Url,
+    pub client_id: String,
+    pub client_secret: String,
+    pub auth_uri: String,
+    pub token_uri: String,
+    pub scopes: Vec<String>,
+    pub keyring_service: String,
+    pub keyring_username: String,
+    pub identity_provider: IdentityProvider,
+    pub shim_endpoint_url: Url,
 }
 
 const BUILD_CONFIG_JSON: &'static str = include_str!("build-config.json");
