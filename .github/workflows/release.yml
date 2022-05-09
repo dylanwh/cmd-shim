@@ -122,6 +122,7 @@ jobs:
     - name: Use Cross
       shell: bash
       run: |
+        find /usr /var -name 'openssl.pc'
         cargo install cross
         echo "CARGO=cross" >> $GITHUB_ENV
         echo "TARGET_FLAGS=--target ${{ matrix.target }}" >> $GITHUB_ENV
