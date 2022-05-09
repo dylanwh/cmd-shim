@@ -1,0 +1,11 @@
+{
+    "client_id": "xxxxxxxxxxxxxxxxxxxx",
+    "auth_uri": "https://github.com/login/oauth/authorize",
+    "token_uri": "https://github.com/login/oauth/access_token",
+    "client_secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "scopes": ["repo"],
+    "keyring_service": "cmd-shim",
+    "keyring_username": "tokencache",
+    "identity_provider": "GitHub",
+    "shim_endpoint_url": "https://hardison.dev/shim"
+}
