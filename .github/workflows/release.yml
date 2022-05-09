@@ -104,7 +104,7 @@ jobs:
     - name: Install packages (Ubuntu)
       if: matrix.os == 'ubuntu-18.04'
       run: |
-        sudo apt-get install -y libssl-dev openssl
+        sudo apt-get install -y libssl-dev openssl pkg-config
 
     # - name: Install packages (macOS)
     #   if: matrix.os == 'macos-latest'
@@ -122,8 +122,8 @@ jobs:
     - name: Use Cross
       shell: bash
       run: |
-        find /usr /var -name 'openssl.pc'
         cargo install cross
+        #echo "sudo find /usr/lib -name 'openssl.pc'
         echo "CARGO=cross" >> $GITHUB_ENV
         echo "TARGET_FLAGS=--target ${{ matrix.target }}" >> $GITHUB_ENV
         echo "TARGET_DIR=./target/${{ matrix.target }}" >> $GITHUB_ENV
