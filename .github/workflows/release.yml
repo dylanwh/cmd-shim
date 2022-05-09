@@ -104,7 +104,7 @@ jobs:
     - name: Install packages (Ubuntu)
       if: matrix.os == 'ubuntu-18.04'
       run: |
-        sudo apt-get install -y libssl-dev
+        sudo apt-get install -y libssl-dev openssl
 
     # - name: Install packages (macOS)
     #   if: matrix.os == 'macos-latest'
